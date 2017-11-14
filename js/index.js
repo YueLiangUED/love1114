@@ -77,10 +77,12 @@ $(function (){
                 $loading.css('opacity',0);
                 setTimeout(function(){
                     $loading.hide();
+                    
                 },800);
                 $('.content-boy').addClass('leftIn');
-                $('.content-girl').addClass('rightIn');
-                $('.handle-panel').addClass('fadeIn');
+                    $('.content-girl').addClass('rightIn');
+                    $('.handle-panel').addClass('fadeIn');
+
             }
         });
     })();
