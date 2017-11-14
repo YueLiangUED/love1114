@@ -1,0 +1,208 @@
+@charset "utf-8";
+html,body {
+    width: 100%;
+    height: 100%;
+}
+body {
+    position: relative;
+    background-color: #ff97b2;
+}
+.view-wrapper,
+.view-content,
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #ffffff;
+    font-size: 0.3rem;
+    letter-spacing: 2px;
+    z-index: 99;
+    background-color: #ff97b2;
+}
+.loading span {
+    color: #ffff00;
+    margin: 0 5px 0;
+    font-size: 0.5rem;
+}
+
+.view-wrapper {
+    background-color: #ff97b2;
+}
+.bg-layer {
+    position: absolute;
+    left: 50%;
+    top: -2.45rem;
+    width: 9.36rem;
+    height: 6.95rem;
+    margin-left: -4.68rem;
+    border-radius: 50%;
+    background-color: #f1578b;
+}
+.active-rule {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.35rem;
+    text-decoration: underline;
+    color: #ffffff;
+    font-size: 0.26rem;
+    letter-spacing: 1px;
+}
+.heart {
+    position: absolute;
+    top: 0.2rem;
+    right: 2.3rem;
+    width: 1.8rem;
+    height: 0.6rem;
+    background: url("../images/icon_01.png") no-repeat center;
+    background-size: 100%;
+}
+.content-title {
+    position: absolute;
+    top: 0.75rem;
+    left: 0;
+    width: 100%;
+    height: 1.2rem;
+    background: url("../images/title.png") no-repeat center;
+    background-size: auto 100%;
+}
+.explain {
+    position: absolute;
+    top: 1.9rem;
+    left: 0;
+    width: 100%;
+    height: 2.18rem;
+    background: url("../images/img_01.png") no-repeat center;
+    background-size: auto 100%;
+}
+.explain p {
+    width: 5.25rem;
+    line-height: 1.3em;
+    margin: 1.35rem auto 0;
+    font-size: 0.24rem;
+    color: #fff;
+    letter-spacing: 1px;
+}
+.explain p span {
+    color: #ffc160;
+    font-size: 0.28rem;
+}
+.city-layer {
+    position: absolute;
+    top: 7.38rem;
+    left: 50%;
+    width: 7rem;
+    height: 1.6rem;
+    margin-left: -3.5rem;
+    background: url("../images/img_02.png") no-repeat center;
+    background-size: 100%;
+}
+.content-boy {
+    position: absolute;
+    top: 4.35rem;
+    left: 0.7rem;
+    width: 3.62rem;
+    height: 5.06rem;
+    background: url("../images/boy.png") no-repeat center;
+    background-size: 100%;
+    transform: translateX(-1rem);
+    opacity: 0;
+    
+}
+.content-girl {
+    position: absolute;
+    top: 3.8rem;
+    right: 0.55rem;
+    width: 2.83rem;
+    height: 5.5rem;
+    background: url("../images/girl.png") no-repeat center;
+    background-size: 100%;
+    transform: translateX(1rem);
+    opacity: 0;
+}
+.handle-panel {
+    position: absolute;
+    top: 9.35rem;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+}
+.set-question {
+    width: 3.39rem;
+    height: 1.09rem;
+    margin: 0 auto;
+    background: url("../images/btn_03.png") no-repeat center;
+    background-size: 100%;
+}
+.handle-box {
+    width: 5.2rem;
+    margin: 0.22rem auto 0;
+    display: flex;
+    justify-content: space-between;
+}
+.result-btn {
+    width: 1.61rem;
+    height: 0.62rem;
+    background: url("../images/btn_02.png") no-repeat center;
+    background-size: 100%;
+}
+.record-btn {
+    width: 1.61rem;
+    height: 0.62rem;
+    background: url("../images/btn_01.png") no-repeat center;
+    background-size: 100%;
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-delay: 1.5s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.leftIn {
+    animation-name: leftIn;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+}
+@keyframes leftIn {
+  0% {
+    transform: translateX(-1rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0rem);
+    opacity: 1;
+  }
+}
+.rightIn {
+    animation-name: rightIn;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+}
+@keyframes rightIn {
+  0% {
+    transform: translateX(1rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0rem);
+    opacity: 1;
+  }
+}

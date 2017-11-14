@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <link rel="stylesheet" type="text/css" href="css/reset-app.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>你爱我有多深</title>
+    <script>
+        (function (global) {
+            function remChange() {
+                document.documentElement.style.fontSize = 100 * document.documentElement.clientWidth / 750 + 'px';
+            }
+            remChange();
+            global.addEventListener('resize', remChange, false);
+        })(window);
+    </script>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+</head>
+<body style="visibility:hidden;">
+    <!-- 页面html代码开始 -->
+    <div class="loading">
+        <p>正在加载<span class="loading-num">0</span>%</p>
+    </div>
+    <div class="view-wrapper">
+        <div class="bg-layer"></div>
+        <div class="view-content">
+            <div class="active-rule">
+                活动规则
+            </div>
+            <div class="heart"></div>
+            <div class="content-title"></div>
+            <div class="explain">
+                <p>成功出题并分享即可获得<span>100M</span>，首次答题还有机会获得随机奖品一份，最高可得<span>1GB</span>！</p>
+            </div>
+            <div class="city-layer"></div>
+            <div class="content-boy"></div>
+            <div class="content-girl"></div>
+
+            <div class="handle-panel">
+                <div class="set-question"></div>
+                <div class="handle-box">
+                    <span class="result-btn"></span>
+                    <span class="record-btn"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 页面html代码结束 -->
+    <script type="text/javascript">
+        setTimeout(function () {
+            document.getElementsByTagName('body')[0].style.visibility = 'visible';
+        }, 100)
+    </script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>
