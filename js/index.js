@@ -103,14 +103,26 @@ $(function (){
     
     $('.active-rule').on('touchend', function (event) {
         event.preventDefault();
-        console.log(123456)
         $('.rule-page').css({
            'transform': 'translateX(0)'
         });
     });
-    $('.rule-page-return').on('touchend', function () {
+    $('.rule-page-return').on('touchend', function (event) {
         event.preventDefault();
         $('.rule-page').css({
+           'transform': 'translateX(7.5rem)'
+        });
+    });
+
+    $('.record-btn').on('touchend', function (event) {
+        event.preventDefault();
+        $('.record-page').css({
+           'transform': 'translateX(0)'
+        });
+    });
+    $('.record-page-btn').on('touchend', function (event) {
+        event.preventDefault();
+        $('.record-page').css({
            'transform': 'translateX(7.5rem)'
         });
     });
