@@ -1,0 +1,364 @@
+<script type="text/javascript">
+;(function($){
+    var loadImg = function(pics, callback, piston, num){
+        var index = 0;
+        var len = pics.length;
+        var img = new Image();
+        var flag = false;
+        var progress = function(w){
+            //console.log(w)
+            num.html(w);
+            if(piston == 'undefined'){
+                return false;
+            }
+            piston.stop().animate({width:w});
+        }
+        var load = function(){
+            img.src = pics[index];
+            img.onload = function() {
+                // 控制台显示加载图片信息
+                progress(Math.floor(((index + 1) / len) * 100) + "%");
+                index ++ ;
+                if (index < len) {
+                    load();
+                }else{
+                    callback();
+                }
+            }
+            return img;
+        }
+        if(len > 0){
+            load();
+        }else{
+            progress("100%");
+        }
+        return {
+            pics: pics,
+            load: load,
+            progress: progress
+        };
+    }
+    
+    if(typeof(pics) == 'undefined'){
+        // alert(111);
+        pics = [];
+    }
+
+    $.extend({
+        uImgLoad : function(options){
+            var options = options || {};
+            var defaults = {
+                pics : [],
+                loaded : function(){},
+                piston : 'undefined'
+            }
+            options = $.extend({},defaults,options);
+            loadImg(options.pics, function(){
+                setTimeout(function(){
+                   options.loaded();
+                }, 1200);
+            },options.piston,options.num);
+        }
+    });
+})(jQuery);
+
+$(function(){
+
+    // 分享begin
+    /* ua */
+    var UA = function(){
+        var userAgent = navigator.userAgent.toLowerCase();
+        return {
+            ipad: /ipad/.test(userAgent),
+            iphone: /iphone/.test(userAgent),
+            android: /android/.test(userAgent),
+            qqnews: /qqnews/.test(userAgent),
+            weixin: /micromessenger/.test(userAgent),
+            qqnews_version: userAgent.match(/qqnews/i) == "qqnews" ? userAgent.split('qqnews/')[1] : ''
+        };
+    };
+    function shareQQNews() {
+        var ua = UA();
+        switch(true){
+          case ua.qqnews:
+            if(window.TencentNews && window.TencentNews.setShareArticleInfo){
+                window.TencentNews.setShareArticleInfo(wxTitle, wxDesc, wxDesc, shareLink, wxImg);
+            }
+            if(window.TencentNews && window.TencentNews.showShareMenu) {
+                window.TencentNews.showShareMenu(shareLink, wxTitle, wxDesc, wxImg,"news_news_wc");
+            }else{
+                window.TencentNews.shareFromWebView(wxTitle, wxDesc, wxImg);
+            }
+            break;
+          case ua.weixin:
+            showItem($pop_share);
+            break;
+          default:
+            //return false;
+            window.location = "http://share.v.t.qq.com/index.php?c=share&a=index&appkey=801378464&url="
+            + shareLink + "&title="
+            + wxTitle + '——' + wxDesc +"&pic="
+            + wxImg + "&des="
+            + wxDesc;
+            break;
+        };
+    }
+
+
+    // 分享提示
+    var $ac_share = $('.ac_share');
+    var timeFx = null;
+    $ac_share.click(function(){
+        shareQQNews();
+    });
+    var $pop_share = $('.pop_share');
+    var timeShare = null;
+    function showItem(item){
+        clearTimeout(timeFx);
+        item.show().addClass('show');
+        timeFx = setTimeout(function(){
+            hideItem(item);
+        },2000);
+    }
+    function hideItem(item){
+        clearTimeout(timeShare);
+        item.removeClass('show');
+        timeShare = setTimeout(function(){
+            item.hide();
+        },500);
+    }
+    /*分享over*/
+
+    var pics = [
+            'http://mat1.gtimg.com/yslp/wuyi/btn.png',
+            'http://mat1.gtimg.com/yslp/wuyi/fan.png',
+            'http://mat1.gtimg.com/yslp/wuyi/home_title.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_01.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_02.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_03.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_04.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_05.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_06.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_07.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_08.png',
+            'http://mat1.gtimg.com/yslp/wuyi/ld_09.png',
+            'http://mat1.gtimg.com/yslp/wuyi/list_01.png',
+            'http://mat1.gtimg.com/yslp/wuyi/list_02.png',
+            'http://mat1.gtimg.com/yslp/wuyi/list_title.png',
+            'http://mat1.gtimg.com/yslp/wuyi/loading_bg.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_01.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_02.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_03.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_04.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_05.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_06.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_07.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_08.png',
+            'http://mat1.gtimg.com/yslp/wuyi/name_09.png',
+            'http://mat1.gtimg.com/yslp/wuyi/result_title.png',
+            'http://mat1.gtimg.com/yslp/wuyi/result_top.png',
+            'http://mat1.gtimg.com/yslp/wuyi/right.png',
+            'http://mat1.gtimg.com/yslp/wuyi/turn.png',
+            'http://mat1.gtimg.com/yslp/wuyi/wrong.png',
+            'http://mat1.gtimg.com/yslp/wuyi/xu.png',
+            'http://mat1.gtimg.com/yslp/wuyi/icon_fx.png',
+            'http://mat1.gtimg.com/yslp/wuyi/pop_share.png',
+            'http://mat1.gtimg.com/yslp/wuyi/xunzhang.png'
+        ];
+
+    //loading
+    var $loading = $('.loading');
+    var $loading_anm = $loading.find('.an i');
+    var $loading_num = $loading.find('.num');
+    var timeRm = null;
+    $.uImgLoad({
+        pics : pics,
+        // piston: $loading_anm,
+        num:$loading_num,
+        loaded: function(){
+            $loading.css('opacity',0);
+            setTimeout(function(){
+                $loading.hide();
+            },800);
+        }
+    });
+
+    var $window = $(window),
+        ww = $window.width(),
+        wh = $window.height(),
+        $layout = $('.layout'),
+        $list = $('.list'),
+        $list_li = $list.find('li'),
+        $list_li_t = $list_li.filter('.to'),
+        ll = $list_li.length,
+        timeTouchEnd = null,
+        timeRm = null
+        ;
+    $list_li.each(function(i,item){
+        $(this).css('z-index',ll - i);
+    });
+
+    // console.log($list.css('transform'));
+    $list_li.width(ww);
+    var bg_w_h= 640/1006;
+    function listSize(){
+        if(ww/wh > bg_w_h){
+            $list.height(wh);
+            $list.css('top',0);
+        }else{
+            $list.height(ww/bg_w_h);
+            $list.css('top',(wh-ww/bg_w_h)/2);
+        }
+    }
+    listSize();
+    $window.resize(function(){
+        ww = $window.width();
+        wh = $window.height();
+        $list_li.width(ww);
+        listSize();
+    });
+
+    // 触屏事件
+    var reg_transform = /\-?[0-9]+\.?[0-9]*/g;
+    var currentPage = 0;
+    //触屏原始值
+    var _firstY = 0;
+    var _finishY = 0;
+    var _firstX = 0;
+    var _finishX = 0;
+    var _startX = 0;
+    var _startY = 0;
+    function touchStart(event) {
+        $list_li.removeClass('am_css');
+        var $this_li = $(event.srcElement);
+        if($this_li.get(0).tagName !='li'){
+            $this_li = $this_li.closest('li');
+        }
+        $this_li.next().show();
+        _startX = event.touches[0].clientX;
+        _startY = event.touches[0].clientY;
+        _firstY = _startY;
+        _firstX = _startX;
+    }
+    function touchMove(event) {
+        // console.log(event.srcElement);
+        var $this_li = $(event.srcElement);
+        if($this_li.get(0).tagName !='li'){
+            $this_li = $this_li.closest('li');
+        }
+        $list_li.removeClass('anm_css');
+        var touches = event.touches;
+        var _endX = event.touches[0].clientX;
+        var _endY = event.touches[0].clientY;
+        event.preventDefault();
+        _finishY = _endY;
+        _finishX = _endX;
+        var _absY = Math.abs(_endY-_startY);
+        var _absX = Math.abs(_endX-_startX);
+        //var lastY = parseInt(options.moveWall.css('top'));
+        var lastX = parseInt($this_li.css('transform').match(reg_transform)[4]);
+        //console.log(lastY);
+        // var lastX = parseInt($h_content.css('left'));
+        if(Math.abs(_endY-_startY)>Math.abs(_endX-_startX)){
+            _startY = _endY;
+            return;
+        }else{
+            if(_startX > _endX){
+                if(!$this_li.hasClass('to')){
+                    return false;
+                }
+                $this_li.find('.fan').css('opacity',1);
+                //options.moveWall.css('top',parseInt(lastY)-_absY);
+                $this_li.css('transform','translate(' + (parseInt(lastX)-_absX) +'px,0)');
+                $this_li.css('-webkit-transform','translate(' + (parseInt(lastX)-_absX) +'px,0)');
+            }
+            // else{
+            //  if(currentPage > 0){
+            //      lastX = parseInt($this_li.prev().css('transform').match(reg_transform)[4]);
+            //  }
+            //  //options.moveWall.css('top',parseInt(lastY)+_absY);
+            //  $this_li.prev().css('transform','translate(' + (parseInt(lastX)+_absX) +'px,0)');
+            //  $this_li.prev().css('-webkit-transform','translate(' + (parseInt(lastX)+_absX) +'px,0)');
+            // }
+            _startX = _endX;
+        }
+        
+    }
+    var timeBindTouch = null;
+    function touchEnd(event){
+        // clearTimeout(timeBindTouch);
+        if(_firstX == _finishX){
+            return;
+        }
+        // else{
+        //  unbindTouch();
+        //  timeBindTouch = setTimeout(bindTouch,200);
+        // }
+        var $this_li = $(event.srcElement);
+        if($this_li.get(0).tagName !='li'){
+            $this_li = $this_li.closest('li');
+        }
+        setTimeout(function(){
+            $this_li.find('.fan').css('opacity',0);
+        },300);
+        //var ul_top = parseInt(options.moveWall.css('top'));
+        var ul_top = parseInt($this_li.css('transform').match(reg_transform)[4]);
+        $list_li.addClass('am_css');
+        pianli = _firstX > _finishX ? -ww/2 : ww/2;
+
+        if(_firstX > _finishX){
+            if(!$this_li.hasClass('to')){
+                return false;
+            }
+            if(currentPage < ll-1){
+                currentPage = $this_li.index() + 1;
+                $this_li.css({
+                    'transform':'translate(-' + ww + 'px,0)',
+                    '-webkit-transform':'translate(-' + ww + 'px,0)'
+                });
+                // 显示下一个li的图片
+                showNextImg($this_li);
+            }else{
+                $this_li.css({
+                    'transform':'translate(0,0)',
+                    '-webkit-transform':'translate(0,0)'
+                });
+            }
+        }
+        // else{
+        //  if(currentPage >0){
+        //      ul_top = parseInt($this_li.prev().css('transform').match(reg_transform)[4]);
+        //      currentPage = $this_li.index() -1;
+        //      $this_li.prev().css({
+        //          'transform':'translate(0,0)',
+        //          '-webkit-transform':'translate(0,0)'
+        //      });
+        //  }else{
+        //      $this_li.css({
+        //          'transform':'translate(0,0)',
+        //          '-webkit-transform':'translate(0,0)'
+        //      });
+        //  }
+        // }
+
+        clearTimeout(timeTouchEnd);
+        clearTimeout(timeRm);
+        timeTouchEnd = setTimeout(function(){
+            $list_li.addClass('anm');
+            timeRm = setTimeout(function(){
+                $list_li.removeClass('anm');
+            },1200);
+        },400);
+        
+        
+        // if(currentPage >= options.wallItem.length - 1){
+        //  clearTimeout(timeBindTouch);
+        //  unbindTouch();
+        // }
+        _firstY = 0;
+        _finishY = 0;
+        _finishX = 0;
+        _firstX = 0;
+    }
+    function bindTouch(){
+        $list_li.bind('touchstart…</script>
