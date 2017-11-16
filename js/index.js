@@ -61,12 +61,26 @@ $(function (){
             'images/btn_01.png',
             'images/btn_02.png',
             'images/btn_03.png',
+
             'images/boy.png',
+            'images/boy-head.png',
             'images/girl.png',
+            'images/girl-head.png',
+            
             'images/icon_01.png',
+            'images/icon_02.png',
+            'images/icon_03.png',
+            'images/icon_04.png',
+            'images/icon_05.png',
+
             'images/img_01.png',
             'images/img_02.png',
-            'images/title.png'
+            'images/img_03.png',
+
+            'images/title.png',
+            
+            
+
         ];
         var $loading_num = $('.loading-num');
         var $loading = $('.loading');
@@ -87,4 +101,17 @@ $(function (){
         });
     })();
     
+    $('.active-rule').on('touchend', function (event) {
+        event.preventDefault();
+        console.log(123456)
+        $('.rule-page').css({
+           'transform': 'translateX(0)'
+        });
+    });
+    $('.rule-page-return').on('touchend', function () {
+        event.preventDefault();
+        $('.rule-page').css({
+           'transform': 'translateX(7.5rem)'
+        });
+    });
 });
